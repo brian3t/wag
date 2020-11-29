@@ -12,42 +12,16 @@ function Square(props){
 }
 
 class Board extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            squares: Array(9).fill(null),
-            x_is_next: true
-        };
-    }
-
-    handleClick(i){
-        const squares = this.state.squares.slice();
-        if (calculateWinner(squares) || squares[i]) {
-            return;
-        }
-        const new_squares = this.state.squares.slice();
-        new_squares[i] = this.state.x_is_next ? 'X' : 'O'
-        this.setState({squares: new_squares, x_is_next: ! this.state.x_is_next});
-    }
 
     renderSquare(i){
-        return <Square value={this.state.squares[i]}
-                       onTap={() => this.handleClick(i)}
+        return <Square value={this.props.squares[i]}
+                       onTap={() => this.props.onTap(i)}
         />;
     }
 
     render(){
-        const winner = calculateWinner(this.state.squares);
-        let status;
-        if (winner) {
-            status = 'Winner: ' + winner;
-        } else {
-            status = 'Next player: ' + (this.state.x_is_next ? 'X' : 'O');
-        }
-
         return (
             <div>
-                <div className="status">{status}</div>
                 <div className="board-row">
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}
@@ -69,19 +43,81 @@ class Board extends React.Component {
 }
 
 class Game extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            history: [{
+                squares: Array(9).fill(null)
+            }],
+            step_num: 0,
+            x_is_next: true
+        }
+    }
+
     render(){
+        const history = this.state.history
+        const current = history[this.state.step_num]
+        const winner = calculateWinner(current.squares)
+        const moves = history.map((step, move) => {
+            const desc = move ? `Go to move # ${move}` : `Go to game start`
+            const moves_coords = step.squares.reduce((accu, a_move, index) => {
+                if (! a_move) return accu
+                return accu + ` ${a_move} at coord ${index_to_coord(index)} |`
+            },'')
+            return (
+                <li key={move}>
+                    <button onClick={() => this.jumpTo(move)}>{desc}</button>
+                    &nbsp;&nbsp;    <span>Moves: {moves_coords}</span>
+                </li>
+            )
+        })
+
+
+        let status
+        if (winner) {
+            status = `Winnder: ${winner}`
+        } else {
+            status = `Next player: ` + (this.state.x_is_next ? 'X' : 'O')
+        }
         return (
             <div className="game">
                 <div className="game-board">
-                    <Board/>
+                    <Board
+                        squares={current.squares}
+                        onTap={(i) => this.handleTap(i)}/>
                 </div>
                 <div className="game-info">
-                    <div>{/* status */}</div>
-                    <ol>{/* TODO */}</ol>
+                    <div>{status}</div>
+                    <ol>{moves}</ol>
                 </div>
             </div>
         );
     }
+
+    handleTap(i){
+        const history = this.state.history.slice(0, this.state.step_num + 1) //reset history
+        const current = history[history.length - 1]
+        const new_squares = current.squares.slice();
+        if (calculateWinner(new_squares) || new_squares[i]) {
+            return;
+        }
+        new_squares[i] = this.state.x_is_next ? 'X' : 'O'
+        this.setState({
+                history: history.concat([{squares: new_squares}])
+                , step_num: history.length
+                , x_is_next: ! this.state.x_is_next
+            }
+        )
+        ;
+    }
+
+    jumpTo(step){
+        this.setState({
+            step_num: step,
+            x_is_next: (step % 2) === 0
+        })
+    }
+
 }
 
 // ========================================
@@ -109,4 +145,33 @@ function calculateWinner(squares){
         }
     }
     return null;
+}
+
+/**
+ * Convert index to row,col
+ * 4 becomes 2, 2
+ * @param index
+ * @returns {(number)[]}
+ */
+function index_to_coord(index){
+    const row = Math.floor(index / 3) + 1
+    const col = index % 3 + 1
+    return [row, col]
+}
+
+/**
+ * Get last move based on current square and previous square
+ * @param cur_sq
+ * @param prev_sq
+ */
+function get_last_move(cur_sq, prev_sq){
+    let last_move, last_move_index
+    cur_sq.forEach((cur_move, index)=>{
+        if (prev_sq[index] !== cur_move){
+            last_move = cur_move
+            last_move_index = index
+        }
+    })
+    if (! last_move || !last_move_index) return false
+    return [last_move, index_to_coord(last_move_index)]
 }
