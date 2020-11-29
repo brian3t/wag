@@ -5,7 +5,8 @@ import './index.css';
 function Square(props){
     return (
         <button className="square"
-                onClick={props.onTap}>
+                onClick={props.onTap}
+        >
             {props.value}
         </button>
     );
@@ -15,28 +16,26 @@ class Board extends React.Component {
 
     renderSquare(i){
         return <Square value={this.props.squares[i]}
-                       onTap={() => this.props.onTap(i)}
+                       key={i}
+                       onTap={() => this.props.onTap(i)
+                       }
         />;
+    }
+
+    render_row(row){
+        return (
+            <div className="board-row" key={row}>
+                {
+                    [0, 1, 2].map(col => this.renderSquare(row * 3 + col))
+                }
+            </div>
+        )
     }
 
     render(){
         return (
             <div>
-                <div className="board-row">
-                    {this.renderSquare(0)}
-                    {this.renderSquare(1)}
-                    {this.renderSquare(2)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(3)}
-                    {this.renderSquare(4)}
-                    {this.renderSquare(5)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(6)}
-                    {this.renderSquare(7)}
-                    {this.renderSquare(8)}
-                </div>
+                {[0, 1, 2].map(row => this.render_row(row))}
             </div>
         );
     }
@@ -60,14 +59,20 @@ class Game extends React.Component {
         const winner = calculateWinner(current.squares)
         const moves = history.map((step, move) => {
             const desc = move ? `Go to move # ${move}` : `Go to game start`
-            const moves_coords = step.squares.reduce((accu, a_move, index) => {
-                if (! a_move) return accu
-                return accu + ` ${a_move} at coord ${index_to_coord(index)} |`
-            },'')
+            const history_from_here = history.slice(0, move + 1)
+            const moves_histories = history_from_here.reduce((accu, snapshot, index, full_hist) => {
+                let prev_snapshot
+                if (index < 1) prev_snapshot = {squares: []} //empty snapshot
+                else prev_snapshot = full_hist[index - 1]
+
+                let last_move = get_last_move(snapshot.squares, prev_snapshot.squares)
+                if (! last_move) return accu
+                return accu + ` ${last_move[0]} at coord ${last_move[1]} |`
+            }, '')
             return (
-                <li key={move}>
+                <li className={(move === this.state.step_num ? 'bold' : 'notbol')} key={move}>
                     <button onClick={() => this.jumpTo(move)}>{desc}</button>
-                    &nbsp;&nbsp;    <span>Moves: {moves_coords}</span>
+                    &nbsp;&nbsp;    <span>Moves: {moves_histories}</span>
                 </li>
             )
         })
@@ -75,7 +80,7 @@ class Game extends React.Component {
 
         let status
         if (winner) {
-            status = `Winnder: ${winner}`
+            status = `Winner: ${winner}`
         } else {
             status = `Next player: ` + (this.state.x_is_next ? 'X' : 'O')
         }
@@ -166,12 +171,12 @@ function index_to_coord(index){
  */
 function get_last_move(cur_sq, prev_sq){
     let last_move, last_move_index
-    cur_sq.forEach((cur_move, index)=>{
-        if (prev_sq[index] !== cur_move){
+    cur_sq.forEach((cur_move, index) => {
+        if (prev_sq[index] !== cur_move) {
             last_move = cur_move
             last_move_index = index
         }
     })
-    if (! last_move || !last_move_index) return false
+    if (! last_move) return false
     return [last_move, index_to_coord(last_move_index)]
 }
