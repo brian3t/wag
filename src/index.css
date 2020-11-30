@@ -35,6 +35,9 @@ ol, ul {
 .square:focus {
     outline: none;
 }
+.square.bold{
+    color: green;
+}
 
 .kbd-navigation .square:focus {
     background: #ddd;
@@ -50,4 +53,7 @@ ol, ul {
 }
 .bold{
     font-weight:bold;
+}
+ol>li{
+    margin-top: 12pt;
 }
