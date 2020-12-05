@@ -34,7 +34,7 @@ const AppComponent = () => {
   function onTabLinkClick(tab) {
     if (previousTab.current !== activeTab) return;
     if (activeTab === tab) {
-      $(`#view-${tab}`)[0].f7.dialog.alert('link clicked');
+      $(`#view-${tab}`)[0].$f7.dialog.alert('link clicked');//Object(dom7__WEBPACK_IMPORTED_MODULE_2__["default"])("#view-".concat(tab))[0].f7View.app
       $(`#view-${tab}`)[0].f7View.router.back();
     }
   }
