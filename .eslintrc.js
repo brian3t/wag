@@ -23,6 +23,12 @@ module.exports = {
     'react',
   ],
   rules: {
+    "semi": 0,
+    "object-curly-spacing": 0,
+    "object-curly-newline": 0,
+    "comma-spacing": 0,
+    "comma-dangle": 0,
+    "no-console": "off",
     "arrow-body-style": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "react/no-unescaped-entities": "off",

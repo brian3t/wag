@@ -6,6 +6,11 @@ import {App, Link, Toolbar, View, Views,} from 'framework7-react';
 import PWA from '../js/pwa';
 import routes from '../js/routes';
 
+/**
+ * bootstrap framework 7 app. Has f7params
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const AppComponent = () => {
   const [activeTab, setActiveTab] = useState('today');
   const previousTab = useRef(null);
@@ -29,6 +34,7 @@ const AppComponent = () => {
   function onTabLinkClick(tab) {
     if (previousTab.current !== activeTab) return;
     if (activeTab === tab) {
+      $(`#view-${tab}`)[0].f7.dialog.alert('link clicked');
       $(`#view-${tab}`)[0].f7View.router.back();
     }
   }
