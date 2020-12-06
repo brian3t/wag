@@ -8,7 +8,7 @@ const MyComponent = () => {
     resolve: (image) => image && image.message
   });
 
-  return imageUrl && <img alt="Here's a good boye!" src={imageUrl}/>
+  return imageUrl && <img alt="Here's a good boye!" src={imageUrl} />
 };
 
 

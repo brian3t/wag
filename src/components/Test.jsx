@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Button, Link, List, ListItem, Navbar, NavRight, NavTitle, Page} from "framework7-react"
+import {App, Button, f7, Link, List, ListItem, Navbar, NavRight, NavTitle, Page} from "framework7-react"
 
 export default class HomePage extends Component {
   state = {
@@ -7,35 +7,42 @@ export default class HomePage extends Component {
   }
 
   componentDidMount(){
-    this.$f7ready((f7) => {
-      this.$f7 = f7
-      f7.dialog.alert('Component mounted');
-      window.F7G = f7
-    });
+  }
+
+  onPageBeforeIn = () => {
+    alert('aaaa')
+    f7.dialog.confirm('before in')
+    super.onPageBeforeIn()
   }
 
   asdf = () => {
-    this.$f7.dialog.prompt('Task Name:', 'Add Task', (name) => {
+    // alert('asdf')
+    console.log(`asdf called`)
+    /*f7.dialog.prompt('Task Name:', 'Add Task', (name) => {
       }
-    )
+    )*/
   }
 
   render = () => (
-    <Page>
-      <Navbar>
-        <NavTitle>To Do List</NavTitle>
-        <NavRight>
-          <Link iconOnly iconF7="add_round_fill" onClick={this.asdf}/>
-        </NavRight>
-      </Navbar>
+    <App>
+      <Page onPageAfterIn={() => console.log(`page after in`)} onPageMounted={() => console.log(`page mounted`)}
+        PageInit={this.asdf}
+      >
+        <Navbar>
+          <NavTitle>To Do List</NavTitle>
+          <NavRight>
+            <Link iconOnly iconF7="add_round_fill" />
+          </NavRight>
+        </Navbar>
 
-      <List simple-list>
-        {this.state.tasks.map((task, i) => (
-          <ListItem title={task.name} key={i}>
-            <Button click={this.asdf()}>asdf</Button>
-          </ListItem>
-        ))}
-      </List>
-    </Page>
+        <List simple-list>
+          {this.state.tasks.map((task, i) => (
+            <ListItem title={task.name} key={i}>
+              <Button onClick={this.asdf}>click me to launch asdf</Button>
+            </ListItem>
+          ))}
+        </List>
+      </Page>
+    </App>
   );
 }

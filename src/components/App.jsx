@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import $ from 'dom7';
 
-import {App, Link, Toolbar, View, Views} from 'framework7-react';
+import {App, Button, f7, Link, Toolbar, View, Views} from 'framework7-react';
 
 import PWA from '../js/pwa';
 import routes from '../js/routes';
@@ -19,9 +19,10 @@ const AppComponent = () => {
   }, [activeTab]);
 
   // Framework7 Parameters
+  // configure routes here
   const f7params = {
-    name: 'App Store',
-    theme: 'ios',
+    name: 'auto',
+    theme: 'md',
     routes,
     autoDarkTheme: true,
   };
@@ -30,17 +31,22 @@ const AppComponent = () => {
     PWA.init();
   }
 
+  function test_goto(){
+    console.log(`goto pressed`)
+    this.$f7router.navigate('/games/')
+  }
+
   function onTabLinkClick(tab){
     if (previousTab.current !== activeTab) return;
     if (activeTab === tab) {
-      $(`#view-${tab}`)[0].f7View.app.dialog.alert('link clicked');//Object(dom7__WEBPACK_IMPORTED_MODULE_2__["default"])("#view-".concat(tab))[0].f7View.app
+      f7.dialog.confirm('a')
       $(`#view-${tab}`)[0].f7View.router.back();
     }
   }
 
   return (
     <App params={f7params}>
-
+      <Button onClick={test_goto}> testgoto</Button>
       {<Views tabs className="safe-areas">
         <Toolbar tabbar labels bottom>
           <Link

@@ -9,7 +9,7 @@ import AppsTableList from '../components/AppsTableList';
 import AppstoreBlockTitle from '../components/AppstoreBlockTitle';
 
 const Games = () => {
-  const featuredGames = games.filter((app) => !!app.featured);
+  const featuredGames = games.filter((app) => !! app.featured);
   const playingNow = games;
   const popularGames = [...games]
     .sort((app1, app2) => app2.rating - app1.rating)
@@ -20,9 +20,13 @@ const Games = () => {
     .slice(0, 12);
   const topFreeGames = [...popularGames].reverse();
   const editorsChoice = games.slice(10);
-
+  const debugg = () => {
+    window.gthis = this.props
+  }
   return (
     <AppstorePage title="Games">
+      <div><Button onClick={debugg}>debugging</Button>
+      </div>
       <FeaturedApps backText="Games" apps={featuredGames} />
 
       <AppstoreBlockTitle title="What We're Playing Now">

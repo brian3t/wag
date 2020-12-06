@@ -4,8 +4,8 @@ import AppstorePageTitle from './AppstorePageTitle';
 import './AppstorePage.less';
 
 const AppstorePage = ({
-  title, navbarHeading, noCollapsedNavbar, children,
-}) => {
+                        title, navbarHeading, noCollapsedNavbar, children,
+                      }) => {
   return (
     <Page className={`appstore-page ${noCollapsedNavbar ? 'appstore-page-no-collapsed-navbar' : ''}`}>
       <Navbar className={`appstore-page-large-navbar ${noCollapsedNavbar ? 'appstore-page-no-collapsed-navbar' : ''}`} large transparent title={title} />

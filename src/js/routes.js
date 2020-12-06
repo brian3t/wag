@@ -10,6 +10,10 @@ const routes = [
     component: Today,
   },
   {
+    path: '/games/:gameid',
+    component: Games,
+  },
+  {
     path: '/games/',
     component: Games,
   },
