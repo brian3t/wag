@@ -18,9 +18,10 @@ if ((Device.ios || Device.android) && Device.standalone) {
   const viewPortContent = document.querySelector('meta[name="viewport"]').getAttribute('content');
   document.querySelector('meta[name="viewport"]').setAttribute('content', `${viewPortContent}, maximum-scale=1, user-scalable=no`);
 }
+window.F7 = React.createElement(App)
 
 // Mount React App
 ReactDOM.render(
-  React.createElement(App),
+  window.F7,
   document.getElementById('app'),
 );

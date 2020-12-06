@@ -1,6 +1,6 @@
 # App Store UI
 
-npm install --global cross-env
+npm install --global cross-env &&
 yarn install
 
 ## NPM Scripts
