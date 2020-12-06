@@ -1,6 +1,6 @@
 import Framework7, {Device, Request, Utils} from 'framework7/framework7-lite.esm';
 // import Appbar from 'framework7/components/appbar/appbar';
-// import Dialog from 'framework7/components/dialog/dialog';
+import Dialog from 'framework7/components/dialog/dialog';
 import Popup from 'framework7/components/popup/popup';
 // import LoginScreen from 'framework7/components/login-screen/login-screen';
 // import Popover from 'framework7/components/popover/popover';
@@ -55,7 +55,7 @@ import Typography from 'framework7/components/typography/typography';
 
 Framework7.use([
   // Appbar,
-  // Dialog,
+  Dialog,
   Popup,
   // LoginScreen,
   // Popover,

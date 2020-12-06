@@ -30,6 +30,11 @@ module.exports = {
     "object-curly-newline": 0,
     "comma-spacing": 0,
     "comma-dangle": 0,
+    "key-spacing": 0,
+    "space-before-blocks": 0,
+    "prefer-arrow-callback": 0,
+    "indent": 0,
+    "function-paren-newline": 0,
     "no-trailing-space": 0,
     "no-console": "off",
     "arrow-body-style": "off",
@@ -42,6 +47,8 @@ module.exports = {
 
     "react/jsx-filename-extension": "off",
     //12/05 BN added
+    "react/jsx-curly-newline": 0,
+    "react/jsx-closing-tag-location": 0,
     "react/state-in-constructor": 0,
     "react/destructuring-assignment": 0,
     "react/no-access-state-in-setstate": 0,

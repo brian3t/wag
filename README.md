@@ -3,6 +3,12 @@
 npm install --global cross-env &&
 yarn install
 
+then npm build-dev
+and npm start
+
+In babel.config.js, need to add plugin:    "@babel/plugin-proposal-class-properties"
+
+
 ## NPM Scripts
 
 * 🔥 `start` - run development server
