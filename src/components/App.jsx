@@ -2,7 +2,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import $ from 'dom7';
 
 import {App, Button, f7, Link, Toolbar, View, Views} from 'framework7-react';
-
 import PWA from '../js/pwa';
 import routes from '../js/routes';
 
@@ -33,7 +32,8 @@ const AppComponent = () => {
 
   function test_goto(){
     console.log(`goto pressed`)
-    this.$f7router.navigate('/games/')
+    f7.dialog.confirm('/games/')
+    window.f7 = f7
   }
 
   function onTabLinkClick(tab){

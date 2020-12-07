@@ -1,7 +1,7 @@
 {
+  "description": "Wag mobile app",
   "name": "Wag mobile app",
   "short_name": "Wag mobile app",
-  "description": "Wag mobile app",
   "lang": "en-US",
   "start_url": "/",
   "display": "standalone",
