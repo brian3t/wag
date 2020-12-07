@@ -5,6 +5,9 @@ import {App, Button, f7, Link, Toolbar, View, Views} from 'framework7-react';
 import PWA from '../js/pwa';
 import routes from '../js/routes';
 
+window.f7 = undefined //handy global. will be set in AppComponent below
+window.f7router = undefined //handy global. will be set in AppComponent below
+
 /**
  * bootstrap framework 7 app. Has f7params
  * @returns {JSX.Element}
@@ -25,6 +28,7 @@ const AppComponent = () => {
     routes,
     autoDarkTheme: true,
   };
+
   if (process.env.NODE_ENV === 'production') {
     // Register service worker in production mode only
     PWA.init();
@@ -32,8 +36,12 @@ const AppComponent = () => {
 
   function test_goto(){
     console.log(`goto pressed`)
-    f7.dialog.confirm('/games/')
-    window.f7 = f7
+    const f7r = window.f7router
+    f7r.navigate('/games/99')
+    /*f7r.navigate({
+      name: 'games',
+      params: {gameid: 88},
+    })*/
   }
 
   function onTabLinkClick(tab){
@@ -82,7 +90,10 @@ const AppComponent = () => {
           />
         </Toolbar>
 
-        <View id="view-today" onTabShow={() => setActiveTab('today')} main tab tabActive url="/today/" />
+        <View id="view-today" onTabShow={() => setActiveTab('today')} main tab tabActive url="/today/" onViewInit={() => {
+          window.f7 = f7
+          window.f7router = f7.views[0].router
+        }} />
         <View id="view-games" onTabShow={() => setActiveTab('games')} tab url="/games/" />
         <View id="view-apps" onTabShow={() => setActiveTab('apps')} tab url="/apps/" />
         <View id="view-arcade" onTabShow={() => setActiveTab('arcade')} tab url="/arcade/" />
@@ -92,6 +103,6 @@ const AppComponent = () => {
       }
     </App>
   );
-};
+}
 
 export default AppComponent;

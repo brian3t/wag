@@ -10,13 +10,16 @@ const routes = [
     component: Today,
   },
   {
-    path: '/games/:gameid',
+    name: 'games',
+    path: '/games/:gameid?',
     component: Games,
   },
+/*
   {
     path: '/games/',
     component: Games,
   },
+*/
   {
     path: '/apps/',
     component: Apps,

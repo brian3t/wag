@@ -8,7 +8,7 @@ import FeaturedApps from '../components/FeaturedApps';
 import AppsTableList from '../components/AppsTableList';
 import AppstoreBlockTitle from '../components/AppstoreBlockTitle';
 
-const Games = () => {
+const Games = (props) => {
   const featuredGames = games.filter((app) => !! app.featured);
   const playingNow = games;
   const popularGames = [...games]
@@ -21,11 +21,11 @@ const Games = () => {
   const topFreeGames = [...popularGames].reverse();
   const editorsChoice = games.slice(10);
   const debugg = () => {
-    window.gthis = this.props
+    window.gthis = props
   }
   return (
     <AppstorePage title="Games">
-      <div><Button onClick={debugg}>debugging</Button>
+      <div><Button onClick={debugg}>Gameid: {props.gameid}</Button>
       </div>
       <FeaturedApps backText="Games" apps={featuredGames} />
 
