@@ -35,6 +35,8 @@ module.exports = {
     "no-multiple-empty-lines": 0,
     "camelcase": 0,
     "space-unary-ops": 0,
+    "arrow-parens" : 0,
+    "eol-last": 0,
     "padded-blocks": 0,
     "space-before-blocks": 0,
     "prefer-arrow-callback": 0,
@@ -55,9 +57,13 @@ module.exports = {
 
     "react/jsx-filename-extension": "off",
     //12/05 BN added
+    "react/prefer-stateless-function": 0,
+    "react/jsx-wrap-multilines": 0,
     "react/jsx-curly-newline": 0,
     "react/jsx-indent-props": 0,
     "react/jsx-no-bind": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/interactive-supports-focus": 0,
     "react/no-this-in-sfc": 0,
     "react/jsx-first-prop-new-line": 0,
     "react/jsx-closing-bracket-location": 0,

@@ -92,7 +92,7 @@ const AppComponent = () => {
 
         <View id="view-today" onTabShow={() => setActiveTab('today')} main tab tabActive url="/today/" onViewInit={() => {
           window.f7 = f7
-          window.f7router = f7.views[0].router
+          window.f7router = f7.views.main.router
         }} />
         <View id="view-games" onTabShow={() => setActiveTab('games')} tab url="/games/" />
         <View id="view-apps" onTabShow={() => setActiveTab('apps')} tab url="/apps/" />
