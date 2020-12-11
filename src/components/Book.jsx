@@ -1,32 +1,43 @@
-import React, {Component} from 'react'
+import React from 'react'
+import {Button, Form, FormControl, FormGroup} from 'react-bootstrap'
+import reactCreateClass from 'create-react-class'
 
-import PropTypes from 'prop-types'
 
-class FirstComponent extends Component {
-  state = {
-    toggle: true
-  }
-
-  constructor(props){
-    super(props);
-    this.state = {toggle: true}
-  }
-
-  toggle(){
-    this.setState({toggle: ! this.state.toggle})
-  }
-
-  render(){
+const Comment = reactCreateClass({
+  getInitialState: function (){
+    return {show: false, newTitle: ''}
+  },
+  handleTitleSubmit: function (){
+    //code to handle input box submit
+  },
+  handleTitleChange: function (e){
+    this.setState({newTitle: e.target.value})
+  },
+  changeComponent: function (){
+    //this toggles the show var which is used for dynamic ui
+    this.setState({show: ! this.state.show})
+  },
+  render: function (){
+    let clickableTitle = ''
+    if (this.state.show) {
+      clickableTitle = <Form inline onSubmit={this.handleTitleSubmit}>
+        <FormGroup controlId="formInlineTitle">
+          <FormControl type="text" onChange={this.handleTitleChange} />
+        </FormGroup>
+      </Form>
+    } else {
+      clickableTitle = <div>
+        <Button onClick={this.changeComponent}>
+          <h3>Default Text</h3>
+        </Button>
+      </div>
+    }
     return (
-      <div onClick={this.toggle} role="button">
-        Hello I am first component, my name is {this.props.name}
-        My toggle state is {this.state.toggle ? 'on' : 'off'}
-      </div>)
+      <div className="comment">
+        {clickableTitle}
+      </div>
+    )
   }
-}
+})
 
-FirstComponent.propTypes = {
-  name: PropTypes.string.isRequired
-}
-
-export default FirstComponent
+export default Comment

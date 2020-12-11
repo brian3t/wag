@@ -38,6 +38,8 @@ module.exports = {
     "arrow-parens" : 0,
     "eol-last": 0,
     "padded-blocks": 0,
+    "object-shorthand": 0,
+    "unamed-method": 0,
     "space-before-blocks": 0,
     "prefer-arrow-callback": 0,
     "indent": 0,
