@@ -15,6 +15,7 @@ module.exports = {
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
+      modules: true,
     },
     ecmaVersion: 2018,
     sourceType: 'module',
@@ -40,6 +41,7 @@ module.exports = {
     "padded-blocks": 0,
     "object-shorthand": 0,
     "unamed-method": 0,
+    "no-nested-ternary": 0,
     "space-before-blocks": 0,
     "prefer-arrow-callback": 0,
     "indent": 0,
@@ -48,9 +50,11 @@ module.exports = {
     "no-sequences": 0,
     "function-paren-newline": 0,
     "no-trailing-space": 0,
+    "class-methods-use-this" :"warn",
     "no-console": "off",
     "arrow-body-style": "off",
     "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/label-has-associated-control": 0,
     "react/no-unescaped-entities": "off",
     "react/prop-types": "off",
     "max-len": "off",

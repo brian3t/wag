@@ -1,46 +1,28 @@
-import React from 'react'
-import {Button, Form, FormControl, FormGroup} from 'react-bootstrap'
-import reactCreateClass from 'create-react-class'
+import React, {Component} from 'react'
 
-
-const Comment = reactCreateClass({
-  getInitialState: () => {
-    return {show: false, newTitle: 'default title'}
-  },
-  handleTitleSubmit: function (e){
-    e.stopImmediatePropagation()
-    e.stopPropagation()
-    return e.preventDefault()
-
-    //code to handle input box submit
-  },
-  handleTitleChange: function (e){
-    this.setState({newTitle: e.target.value})
-  },
-  changeComponent: function (){
-    //this toggles the show var which is used for dynamic ui
-    this.setState({show: ! this.state.show})
-  },
-  render: function (){
-    let clickableTitle = ''
-    if (this.state.show) {
-      clickableTitle = <Form inline onSubmit={this.handleTitleSubmit}>
-        <FormGroup controlId="formInlineTitle">
-          <FormControl type="text" onChange={this.handleTitleChange} value={this.state.newTitle} />
-        </FormGroup>
-      </Form>
-    } else {
-      clickableTitle = <div>
-        <h3>{this.state.newTitle}</h3>
-      </div>
+export default class Form extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      name: 'John'
     }
+  }
+
+  onChange = (e) => {
+    this.setState({
+      name: e.target.value
+    })
+  }
+
+  render(){
     return (
-      <div className="comment">
-        {clickableTitle}
-        <Button onClick={this.changeComponent}>Change mode</Button>
+      <div>
+        <label htmlFor="name-input">Name: </label>
+        <input id="name-input"
+               onChange={this.onChange}
+               value={this.state.name.toUpperCase()} />
       </div>
     )
   }
-})
 
-export default Comment
+}
