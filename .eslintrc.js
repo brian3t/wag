@@ -59,6 +59,7 @@ module.exports = {
 
     "react/jsx-filename-extension": "off",
     //12/05 BN added
+    "react/sort-comp": 0,
     "react/prefer-stateless-function": 0,
     "react/jsx-wrap-multilines": 0,
     "react/jsx-curly-newline": 0,
