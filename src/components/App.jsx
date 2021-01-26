@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import $ from 'dom7';
 
-import {App, Button, f7, Link, Toolbar, View, Views} from 'framework7-react';
+import {App, f7, Link, Toolbar, View, Views} from 'framework7-react';
 import PWA from '../js/pwa';
 import routes from '../js/routes';
 
@@ -14,7 +14,7 @@ window.f7router = undefined //handy global. will be set in AppComponent below
  * @constructor
  */
 const AppComponent = () => {
-  const [activeTab, setActiveTab] = useState('today');
+  const [activeTab, setActiveTab] = useState('games');
   const previousTab = useRef(null);
   useEffect(() => {
     previousTab.current = activeTab;
@@ -47,57 +47,35 @@ const AppComponent = () => {
   function onTabLinkClick(tab){
     if (previousTab.current !== activeTab) return;
     if (activeTab === tab) {
-      f7.dialog.confirm('a')
       $(`#view-${tab}`)[0].f7View.router.back();
     }
   }
 
   return (
     <App params={f7params}>
-      <Button onClick={test_goto}> testgoto</Button>
       {<Views tabs className="safe-areas">
         <Toolbar tabbar labels bottom>
           <Link
-            onClick={() => onTabLinkClick('today')}
-            tabLink="#view-today"
-            tabLinkActive
-            iconF7="today"
-            text="Today"
-          />
-          <Link
             onClick={() => onTabLinkClick('games')}
             tabLink="#view-games"
-            iconF7="rocket_fill"
+            tabLinkActive
+            iconF7="today"
             text="Games"
           />
           <Link
-            onClick={() => onTabLinkClick('apps')}
-            tabLink="#view-apps"
+            onClick={() => onTabLinkClick('oldgames')}
+            tabLink="#view-oldgames"
             iconF7="layers_alt_fill"
-            text="Apps"
+            text="Old Games"
           />
-          <Link
-            onClick={() => onTabLinkClick('arcade')}
-            tabLink="#view-arcade"
-            iconF7="gamecontroller_alt_fill"
-            text="Arcade"
-          />
-          <Link
-            onClick={() => onTabLinkClick('search')}
-            tabLink="#view-search"
-            iconF7="search"
-            text="Search"
-          />
+
         </Toolbar>
 
-        <View id="view-today" onTabShow={() => setActiveTab('today')} main tab tabActive url="/today/" onViewInit={() => {
+        <View id="view-games" onTabShow={() => setActiveTab('games')} main tab tabActive url="/games/" onViewInit={() => {
           window.f7 = f7
           window.f7router = f7.views.main.router
         }} />
-        <View id="view-games" onTabShow={() => setActiveTab('games')} tab url="/games/" />
-        <View id="view-apps" onTabShow={() => setActiveTab('apps')} tab url="/apps/" />
-        <View id="view-arcade" onTabShow={() => setActiveTab('arcade')} tab url="/arcade/" />
-        <View id="view-search" onTabShow={() => setActiveTab('search')} tab url="/search/" />
+        <View id="view-oldgames" onTabShow={() => setActiveTab('oldgames')} tab url="/oldgames/" />
 
       </Views>
       }

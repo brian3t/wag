@@ -9,8 +9,7 @@ import '../css/framework7-custom.less';
 import 'framework7-icons/css/framework7-icons.css';
 import '../css/app.less';
 
-// import App from '../components/App';
-import Book from '../components/Book';
+import App from '../components/App';
 // import HomePage from '../components/Test';
 
 Framework7.use(Framework7React);
@@ -23,8 +22,7 @@ if ((Device.ios || Device.android) && Device.standalone) {
 
 // Mount React App
 ReactDOM.render(
-  // React.createElement(App,{name: "brian3t", toggle: true}),
-  React.createElement(Book,{name: "brian3t", toggle: true}),
+  React.createElement(App,{name: "brian3t", toggle: true}),
   // React.createElement(HomePage),
   document.getElementById('app'),
 );

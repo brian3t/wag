@@ -1,8 +1,6 @@
 import Today from '../pages/Today';
 import Games from '../pages/Games';
-import Apps from '../pages/Apps';
-import Arcade from '../pages/Arcade';
-import Search from '../pages/Search';
+import Oldgames from "../pages/Oldgames"
 
 const routes = [
   {
@@ -14,23 +12,9 @@ const routes = [
     path: '/games/:gameid?',
     component: Games,
   },
-/*
   {
-    path: '/games/',
-    component: Games,
-  },
-*/
-  {
-    path: '/apps/',
-    component: Apps,
-  },
-  {
-    path: '/arcade/',
-    component: Arcade,
-  },
-  {
-    path: '/search/',
-    component: Search,
+    path: '/oldgames/',
+    component: Oldgames,
   },
   {
     path: '/app/:id',

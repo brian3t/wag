@@ -76,6 +76,7 @@ module.exports = {
           resolvePath('node_modules/dom7'),
           resolvePath('node_modules/ssr-window'),
         ],
+        exclude: /(node_modules)/,
       },
       {
         test: /\.css$/,
