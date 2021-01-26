@@ -1,37 +1,25 @@
-import React, {Component} from 'react'
+/* eslint-disable no-var */
+import React from 'react'
 
-export default class Book extends Component {
+const ListOfTenThings = () => {
 
-  constructor(){
-    super();
-    this.togRef = React.createRef()
+  const a = true
+  return (
+    <div>
+      {a && <Repeat numTimes={10}>
+        {(index) => <div key={index}>This is item {index} in the list. a is {String(a)}</div>}
+      </Repeat>
+      }
+    </div>
+  )
+};
+// Calls the children callback numTimes to produce a repeated component
+const Repeat = ({numTimes, children}) => {
+  let items = [];
+  for (let i = 0; i < numTimes; i++) {
+    items.push(children(i));
   }
-
-  handleToggle = () => {
-    const el = this.togRef.current
-
-  }
-
-  render = () => {
-    return (
-      <div className="long-desc">
-        <ul className="profile-info">
-          <li>
-            <span className="info-title">User Name : </span> Shuvo Habib
-          </li>
-        </ul>
-
-        <ul className="profile-info additional-profile-info-list" ref={this.togRef}>
-          <li>
-            <span className="info-email">Office Email</span>
-            me@shuvohabib.com
-          </li>
-        </ul>
-        <div className="ellipsis-click" onClick={this.handleToggle}>elip click here
-          <i className="fa-ellipsis-h" />
-        </div>
-      </div>
-    )
-  }
-
+  return <div>{items}</div>;
 }
+
+export default ListOfTenThings
